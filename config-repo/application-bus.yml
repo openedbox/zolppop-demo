@@ -1,0 +1,11 @@
+spring.profiles.include: stream
+spring:
+  cloud:
+    stream:
+      bindings:
+        springCloudBusInput:
+          destination: zolppop.config.bus.topic
+          binder: local_rabbit
+        springCloudBusOutput:
+          destination: zolppop.config.bus.topic.output
+          binder: local_rabbit

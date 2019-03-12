@@ -1,0 +1,2 @@
+spring.cloud.gateway.discovery.locator.enabled: true
+spring.cloud.consul.discovery.tags: version=${APP_VERSION:1.0},type=gateway

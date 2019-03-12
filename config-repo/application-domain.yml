@@ -1,0 +1,12 @@
+spring.profiles.include: stream
+spring:
+  cloud:
+    stream:
+      bindings:
+        domainEventSubscribe:
+          destination: zolppop.domain.event
+          binder: local_rabbit
+          group: ${spring.application.name}
+        domainEventPublish:
+          destination: zolppop.domain.event
+          binder: local_rabbit

@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  service-registry:
+    image: registry.cn-beijing.aliyuncs.com/openedbox/sc-consul:0.1.0
+    # command: ["consul","agent","-dev"]
+    ports:
+      # - "8300:8300"
+      # - "8301:8301"
+      # - "8301:8301/udp"
+      # - "8302:8302"
+      # - "8302:8302/udp"
+      # - "8600:8600"
+      # - "8600:8600/udp"
+      - "8500:8500"
+  config-server:
+    image: registry.cn-beijing.aliyuncs.com/openedbox/sc-config-server:0.1.0
+    ports:
+      - "8888:8888"
+    environment:
+      - APP_PROFILE=native
+      - APP_CONFIG_NATIVE_REPO_DIR=/config-repo
+      - CONSUL_HOST=service-registry
+      - CONSUL_PORT=8500
+    volumes:
+      - ../../config-repo:/config-repo
+    links:
+      - service-registry
+  gateway-server:
+    image: registry.cn-beijing.aliyuncs.com/openedbox/sc-gateway-server:0.1.0
+    ports:
+      - "8000:8000"
+    environment:
+      - ZOLPPOP_CONFIG_SERVER_URI=http://config-server:8888
+      - CONSUL_HOST=service-registry
+      - CONSUL_PORT=8500
+    links:
+      - service-registry
+      - config-server

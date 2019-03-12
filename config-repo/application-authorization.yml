@@ -1,0 +1,12 @@
+spring.cloud.consul.discovery.tags: version=${APP_VERSION:1.0},type=authorization
+
+zolppop.oauth.server.enable: true
+zolppop.oauth.server.accessTokenValiditySeconds: 600000
+zolppop.oauth.server.refreshTokenValiditySeconds: 600000
+zolppop.oauth.server.reuseRefreshToken: false
+zolppop.oauth.server.supportRefreshToken: true
+
+zolppop.oauth.encrypt.type: AUTHORIZATION_SERVER
+zolppop.oauth.encrypt.keyStore.location: classpath:/adp.jks
+zolppop.oauth.encrypt.keyStore.password: '{cipher}c837d17ff7824d2461b0739c5547032eaf04eaca742777d711cf1d9739af3ac2'
+zolppop.oauth.encrypt.keyStore.alias: jwtkey
